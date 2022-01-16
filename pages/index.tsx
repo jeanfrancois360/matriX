@@ -1,8 +1,8 @@
 import _default from 'next/dist/client/router'
-import React from 'react'
+import React, { useState } from 'react'
 
 export const index = () => {
-    const [currentForm, setCurrentForm] = React.useState('login')
+    const [currentForm, setCurrentForm] = useState('login')
     return (
         <div className='flex justify-center items-center h-screen'>
           <div className='flex w-3/5 rounded-xl justify-center bg-white drop-shadow-xl'> 
