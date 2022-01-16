@@ -1,7 +1,7 @@
 import _default from 'next/dist/client/router'
 import React, { useState } from 'react'
 
-export const index = () => {
+export default function index(){
     const [currentForm, setCurrentForm] = useState('login')
     return (
         <div className='flex justify-center items-center h-screen'>
@@ -41,5 +41,3 @@ export const index = () => {
         </div>
     )
 }
-
-export default index;
