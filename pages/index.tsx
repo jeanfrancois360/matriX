@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import _default from 'next/dist/client/router'
 import Head from 'next/head'
 import Image from 'next/image'
