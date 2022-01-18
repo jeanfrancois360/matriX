@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/* eslint-disable jsx-a11y/alt-text */
-=======
->>>>>>> fcd5b2789c74e9044689690e49aed63f5a7e741a
 import _default from 'next/dist/client/router'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -38,11 +34,7 @@ export const Login = () => {
             {currentForm == "login" ?(<div>
             <Image
               priority
-<<<<<<< HEAD
               src="/images/matrix-half-white.png"
-=======
-              src="/images/wisex-half-white.png"
->>>>>>> fcd5b2789c74e9044689690e49aed63f5a7e741a
               height={70}
               width={124}
             />
@@ -54,11 +46,7 @@ export const Login = () => {
           </div>): (<div className=''>
           <Image
               priority
-<<<<<<< HEAD
               src="/images/matrix-half-white.png"
-=======
-              src="/images/wisex-half-white.png"
->>>>>>> fcd5b2789c74e9044689690e49aed63f5a7e741a
               height={70}
               width={124}
             />
