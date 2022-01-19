@@ -7,15 +7,11 @@ const signIn = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       const { email, password } = req.body;
-        console.log(req.body);
-        
       const userExists:any = await prisma.user.findUnique({
         where: {
           email,
         },
       });
-
-      console.log("EXISTS", userExists);
       
       const verifyPassword = await bcrypt.compareSync(
         password,

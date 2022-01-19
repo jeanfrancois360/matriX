@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Link from 'next/link'
+import Loader from "react-loader-spinner";
 import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -9,10 +10,13 @@ import axios from 'axios';
 import Router from 'next/router';
 import { CircularProgress } from '@mui/material';
 import ErrorMessage from "../components/messages/ErrorMessage";
+import { Backdrop, Snackbar } from '@mui/material';
+import styles from "../styles/Home.module.css";
 
 export const Login = () => {
   const [currentForm, setCurrentForm] = useState("login");
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
    useEffect(() => {
         if (localStorage.getItem('token') && localStorage.getItem('user')) {
           Router.push('/transactions');
@@ -62,7 +66,7 @@ export const Login = () => {
 
   const setUserInfo = (data:any) => {
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", data.data);
+      localStorage.setItem("user", JSON.stringify(data.data));
       localStorage.setItem("id", data.data.userExists.id);
       localStorage.setItem("account_no", data.data.account.id);
       setIsLoading(false)
@@ -135,7 +139,7 @@ export const Login = () => {
                       <br />
                        <br />
                       <button className="bg-slate-900 my-4 mx-0 px-6 py-3 w-40 text-emerald-400 rounded-full hover:text-white">
-                        {isLoading ? <CircularProgress /> : 'Sign In'}
+                       {isLoading ? <CircularProgress className={styles.loaderStyle} /> : 'Sign In'}
                       </button>
                     </div>
                   </form>
@@ -214,7 +218,7 @@ export const Login = () => {
  <br />
   <br />
                   <button className="bg-slate-900 my-4 mx-0 px-6 py-3 w-40 text-emerald-400 rounded-full hover:text-white">
-                    {isLoading ? <CircularProgress /> : 'Sign Up'}
+                   {isLoading ? <CircularProgress className={styles.loaderStyle} /> : 'Sign Up'}
                   </button>
                 </div>
               </form>
@@ -230,9 +234,9 @@ export const Login = () => {
               <div>
                 <Image
                   priority
-                  src="/images/matrix-half-white.png"
-                  height={70}
-                  width={124}
+                  src="/images/logo.png"
+                  height={75}
+                  width={160}
                 />
                 <h1 className="text-3xl my-3 font-black m-0 text-emerald-400">
                   Hello, Friend!
@@ -254,9 +258,9 @@ export const Login = () => {
               <div className="">
                 <Image
                   priority
-                  src="/images/matrix-half-white.png"
-                  height={70}
-                  width={124}
+                  src="/images/logo.png"
+                  height={75}
+                  width={160}
                 />
                 <h1 className="text-3xl my-3 font-black m-0 text-emerald-400">
                   Hello, Friend!

@@ -13,7 +13,6 @@ const signUp = async (req: NextApiRequest, res: NextApiResponse) => {
           email
         },
       });
-      console.log(userExists);
       
       if (userExists) {
         return res.status(400).json({
@@ -33,7 +32,6 @@ const signUp = async (req: NextApiRequest, res: NextApiResponse) => {
           password: hash,
         },
       });
-      console.log(user);
       
       const account = await prisma.account.create({
           data: {
@@ -42,14 +40,11 @@ const signUp = async (req: NextApiRequest, res: NextApiResponse) => {
           }
       });
 
-      console.log("account", account);
-      
       await prisma.transaction.create({
         data: { receiverId: user.id, amount: 1000 },
       });
     
       const token = encode_token(user);
-      console.log("token", token);
       
       delete user.password;
 
