@@ -1,19 +1,23 @@
 /* eslint-disable jsx-a11y/alt-text */
-import _default from "next/dist/client/router";
+import Link from 'next/link'
 import Head from "next/head";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import axios from 'axios';
+import Router from 'next/router';
+import { CircularProgress } from '@mui/material';
 import ErrorMessage from "../components/messages/ErrorMessage";
 
 export const Login = () => {
-  const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-  };
   const [currentForm, setCurrentForm] = useState("login");
+  const [isLoading, setIsLoading] = useState(false);
+   useEffect(() => {
+        if (localStorage.getItem('token') && localStorage.getItem('user')) {
+          Router.push('/transactions');
+        }
+      });
 
   // Login validations
   const loginValidationSchema = Yup.object().shape({
@@ -42,13 +46,27 @@ export const Login = () => {
       .label("Password"),
   });
 
-  const handleSignIn = (values:object) => {
-    console.log("LOGIN: ", values)
-  };
+  const handleSignIn = async (values:object) => {
+      setIsLoading(true)
+      let res = await axios.post('/api/authentication/signin', {...values});
+      const { data } = res;
+      setUserInfo(data);
+    };
 
-  const handleSignUp = (values:object) => {
-    console.log("Register: ", values);
-  };
+  const handleSignUp = async (values:object) => {
+      setIsLoading(true)
+      let res = await axios.post('/api/authentication/signup', {...values});
+      const { data } = res;
+      setUserInfo(data);      
+    };
+
+  const setUserInfo = (data:any) => {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", data.data);
+      localStorage.setItem("id", data.data.userExists.id);
+      localStorage.setItem("account_no", data.data.account.id);
+      setIsLoading(false)
+  }
 
   return (
     <>
@@ -117,7 +135,7 @@ export const Login = () => {
                       <br />
                        <br />
                       <button className="bg-slate-900 my-4 mx-0 px-6 py-3 w-40 text-emerald-400 rounded-full hover:text-white">
-                        Sign in
+                        {isLoading ? <CircularProgress /> : 'Sign In'}
                       </button>
                     </div>
                   </form>
@@ -196,7 +214,7 @@ export const Login = () => {
  <br />
   <br />
                   <button className="bg-slate-900 my-4 mx-0 px-6 py-3 w-40 text-emerald-400 rounded-full hover:text-white">
-                    Sign up
+                    {isLoading ? <CircularProgress /> : 'Sign Up'}
                   </button>
                 </div>
               </form>
