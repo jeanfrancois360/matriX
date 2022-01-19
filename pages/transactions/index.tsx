@@ -91,7 +91,7 @@ function Index(props:any) {
                                 <td className='px-6 py-4 whitespace-nowrap'>{transaction['id']}</td>
                                 <td className='px-6 py-4 whitespace-nowrap'>{(transaction['senderId'] && transaction['senderId'] !== undefined) ? transaction['senderId'] === userId ? 'You' : transaction['sender']['name'] : "This app"}</td>
                                 <td className='px-6 py-4 whitespace-nowrap'>{transaction['receiverId'] === userId ? 'You' : transaction['receiver']['name']}</td>
-                                <td className={('px-6 py-4 whitespace-nowrap',transaction['receiverId'] === userId ? 'text-emerald-500' : 'text-red-400')}>{transaction['receiverId'] === userId ? '+' : '-'} {transaction['amount']}</td>
+                                <td className={(transaction['receiverId'] === userId ? 'px-6 py-4 whitespace-nowrap text-emerald-500' : 'px-6 py-4 whitespace-nowrap text-red-400')}>{transaction['receiverId'] === userId ? '+' : '-'} {transaction['amount']}</td>
                                 <td className='px-6 py-4 whitespace-nowrap'>{transaction['sourceCurrency']}</td>
                                 <td className='px-6 py-4 whitespace-nowrap'><Moment format='ddd, MMM Do YYYY'>{transaction['createdAt']}</Moment></td>
                                 <td className='px-6 py-4 whitespace-nowrap'><Moment format='ddd, MMM Do YYYY'>{transaction['updatedAt']}</Moment></td>
