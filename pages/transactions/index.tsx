@@ -5,15 +5,17 @@ import Header from '../../components/navbar';
 import Image from 'next/image'
 import Head from 'next/head';
 import Moment from 'react-moment';
+import { useRouter } from 'next/router'
 
 function Index(props:any) {
+    const Router = useRouter()
     const [data, setData] = useState([]);
     const [userId, setuserId] = useState(-1);
     const [account, setAccount] = useState({balanceUSD: '', balanceNGN: '', balanceEUR: ''})
     
     useEffect(() => {
         if (!localStorage.getItem('token')) {
-            props.history.push("/auth/login");
+              Router.push("/")
         }
         else{
           console.log("You are logged in!")

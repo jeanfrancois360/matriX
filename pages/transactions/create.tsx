@@ -23,7 +23,7 @@ function Create(props:any) {
 
     useEffect(() => {
         if (!localStorage.getItem('token')) {
-            props.history.push("/auth/login");
+           Router.push("/")
         }
         else{
           console.log("You are logged in!")
