@@ -41,6 +41,7 @@ function Create(props:any) {
         setSenderId(Number(id));
         // console.log(user)
         const getUsers = async () => {
+            try {
             const results = await axios.get(`/api/users/${id}`, { headers: { 'Authorization' : `Bearer ${token}` } });
             console.log("GET USERS", results.data);
 
@@ -51,6 +52,9 @@ function Create(props:any) {
                 alert("Error")
             }
             setIsLoading(false)
+        }catch(error){
+            console.error(error)
+        }
         }
         getUsers();
     }, []);
@@ -63,13 +67,20 @@ function Create(props:any) {
     amount: Yup.number().required().label("Amount"),
   });
 
-    const handleSendMoney = async (values:object) => {
-        setIsProcessing(true);
-            const res = await axios.post('/api/transactions/create', { ...values }, { headers : { 'Authorization' : `Bearer ${token}` }});
+    const handleSendMoney = async ({receiverId, source_currency, target_currency, amount}:any) => {
+        try { 
+            setIsProcessing(true);
+            const res = await axios.post('/api/transactions/create', { receiverId, source_currency, target_currency, amount, senderId }, { headers : { 'Authorization' : `Bearer ${token}` }});
             setIsProcessing(false);
-            alert('Transaction Successful')
+            alert('Money was sent successful')
             Router.push('/transactions');
             console.log("New transaction: ", res);
+        } catch (error){
+          alert('Transaction failed! Try again later');
+          console.error(error)
+          setIsProcessing(false);
+          
+        }
     }
     return (
         <>

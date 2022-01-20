@@ -50,18 +50,30 @@ export const Login = () => {
       .label("Password"),
   });
 
-  const handleSignIn = async (values:object) => {
+  const handleSignIn = async ({email, password}:any) => {
+     try { 
       setIsLoading(true)
-      let res = await axios.post('/api/authentication/signin', {...values});
+      let res = await axios.post('/api/authentication/signin', {email, password});
       const { data } = res;
       setUserInfo(data);
+     }catch (error){
+          alert('SignIn failed! Try again later');
+          console.error(error)
+          setIsLoading(false);
+     }
     };
 
-  const handleSignUp = async (values:object) => {
+  const handleSignUp = async ({name, email, password}:any) => {
+    try { 
       setIsLoading(true)
-      let res = await axios.post('/api/authentication/signup', {...values});
+      let res = await axios.post('/api/authentication/signup', {name, email, password});
       const { data } = res;
-      setUserInfo(data);      
+      setUserInfo(data);
+    }catch (error){
+          alert('SignUp failed! Try again later');
+          console.error(error)
+          setIsLoading(false);
+    }      
     };
 
   const setUserInfo = (data:any) => {

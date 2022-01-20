@@ -9,7 +9,7 @@ const createTransaction = async (req: NextApiRequest, res: NextApiResponse) => {
             if(!receiverId || amount < 1 || !senderId) {
                 return res.status(400).json({
                     status: 'failed',
-                    error: 'Transaction cant be made',
+                    error: `Transaction failed`,
                     data: {},
                 });
             }

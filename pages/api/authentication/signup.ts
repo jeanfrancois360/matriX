@@ -47,12 +47,16 @@ const signUp = async (req: NextApiRequest, res: NextApiResponse) => {
       const token = encode_token(user);
       
       delete user.password;
-
+      const user_id = {'id': user.id}
       res.status(200).json({
         status: true,
         message: 'User registration succeeded',
         token,
-        data: user
+        data: {
+            user,
+            account,
+            userExists: user_id,
+        }
       });
     } catch (error) {
       return res.status(400).json({
