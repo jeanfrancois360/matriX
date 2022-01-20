@@ -3,3 +3,7 @@
   height: 20px !important;
   color: #34d399 !important;
 }
+.pageLoaderStyle {
+  color: #34d399 !important;
+  margin: 0 auto !important;
+}
