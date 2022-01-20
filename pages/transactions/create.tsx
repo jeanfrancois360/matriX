@@ -64,8 +64,6 @@ function Create(props:any) {
   });
 
     const handleSendMoney = async (values:object) => {
-        console.log("DATA: ", values)
-        return;
         setIsProcessing(true);
             const res = await axios.post('/api/transactions/create', { ...values }, { headers : { 'Authorization' : `Bearer ${token}` }});
             setIsProcessing(false);
@@ -115,7 +113,7 @@ function Create(props:any) {
                         <div className='flex gap-6'>
                             <div className='mb-4 w-full'>
                                 <label htmlFor="receiverId" className='block text-gray-500 text-sm font-bold mb-2'>Receiver</label>
-                                <select name='receiverId' value={values.receiverId} onChange={handleChange("receiverId")} onBlur={handleBlur("receiverId")} className="form-select appearance-none block w-full px-3 py-3 px-6 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                <select name='receiverId' onChange={handleChange("receiverId")} onBlur={handleBlur("receiverId")} className="form-select appearance-none block w-full px-3 py-3 px-6 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                     <option defaultValue={''}>Select Receiver</option>
                                     {users.length && users.map((user) => (
                                         <option key={user['id']} value={user['id']}>{user['name']}</option>
@@ -127,7 +125,7 @@ function Create(props:any) {
                             </div>
                             <div className='mb-4 w-full'>
                                 <label htmlFor="s_currency" className='block text-gray-500 text-sm font-bold mb-2'>Source currency</label>
-                                <select name='source_currency' value={values.source_currency} onChange={handleChange("source_currency")} onBlur={handleBlur("source_currency")} className="form-select appearance-none block w-full px-3 py-3 px-6 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                <select name='source_currency' onChange={handleChange("source_currency")} onBlur={handleBlur("source_currency")} className="form-select appearance-none block w-full px-3 py-3 px-6 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                     <option selected>choose source currency</option>
                                     <option value="USD">USD</option>
                                     <option value="NGN">NGN</option>
@@ -142,7 +140,7 @@ function Create(props:any) {
                         <div className='flex gap-6 mb-4'>
                              <div className='mb-4 w-full'>
                                 <label htmlFor="t_currency" className='block text-gray-500 text-sm font-bold mb-2'>Target currency</label>
-                                <select name='target_currency' value={values.target_currency} onChange={handleChange("target_currency")} onBlur={handleBlur("target_currency")} className="form-select appearance-none block w-full px-3 py-3 px-6 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                <select name='target_currency' onChange={handleChange("target_currency")} onBlur={handleBlur("target_currency")} className="form-select appearance-none block w-full px-3 py-3 px-6 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                     <option selected>choose target currency</option>
                                     <option value="USD">USD</option>
                                     <option value="NGN">NGN</option>
